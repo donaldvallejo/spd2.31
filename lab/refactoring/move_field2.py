@@ -1,89 +1,40 @@
-# Kami Bigdely
-# Move Field
-
-class Car:
-    def __init__(self, engine, wheels, cabin, tpms_di, fuel_tank):
-        self.engine = engine
-        # TODO: tpms is better to be in the Wheel class. 
-        # Each wheel has a single tpms attached to it. 
-        # Thus, instead of having a list of tpms in 'Car' class
-        # have each of the tpms in each 'Wheel'.
-        self.tpms_list = tpms_di  # Tire Pressure Monitoring System.
-        self.wheels = wheels
-        # Set wheels' car reference into each wheel.
-        for w in wheels:
-            w.set_car(self)
-            
-        self.cabin = cabin
-        self.fuel_tank = fuel_tank
-
-    
-class Wheel:
-    # TODO: You may add tpms as a method parameter here to 
-    #       initilaize the 'Wheel' object or you can create
-    #       a setter method to set the tpms of the wheel. (you can do 
-    #       both of course.)
-    def __init__(self, car = None, wheel_location = None):
-        self.car = car
-        self.wheel_location = wheel_location
-
-    def install_tire(self):
-        print('remove old tube.')
-         # TODO: Rewrite the following after moving tpms to the 'Wheel' class
-        print('cleaned tpms: ', 
-              self.car.tpms_di[self.wheel_location].get_serial_number, 
-              '.')
-        print('installed new tube.')        
-        
-    def read_tire_pressure(self):
-        # TODO: After making tpms an attribute of 'Wheel' class,
-        #       rewrite the following.
-        return self.car.tpms_di[self.wheel_location].get_pressure()
-    
-    def set_car(self, car):
-        self.car = car
-
-
-class Tpms:
-    """Tire Pressure Monitoring System.
-    """
-    def __init__(self, serial_number):
-        self.serial_number = serial_number
-        self.sensor_transmit_range = 300 # [feet]
-        self.sensor_pressure_range = (8,300) # [PSI]
-        self.battery_life = 6 # [year]
-        
-    def get_pressure(self):
-        return 3
-    
-    def get_serial_number(self):
-        return self.serial_number
-    
-class Engine:
+class Food:
     def __init__(self):
-        pass
-    
-class FuelTank:
-    def __init__(self):
-        pass
-    
-class Cabin:
-    def __init__(self):
-        pass    
-    
-
-engine = Engine()
-# TODO: Rewrite the following after moving tpms to the 'Wheel' class.
-wheels = [Wheel(None, 'front-right'), Wheel(None, 'front-left'), 
-          Wheel(None, 'back-right'), Wheel(None, 'back-left')]
-
-cabin  = Cabin()
-
-tpms_di = {'front-right': Tpms(983408543), 'front-left':Tpms(4343083),
-               'back-right':Tpms(23654835), 'back_left':Tpms(3498857)}
-
-fuel_tank = FuelTank()
-
-my_car = Car(engine, wheels, cabin, tpms_di, fuel_tank)
-
-
+        foods = {'butternut squash soup':[45, True, 'soup','North African',\
+            ['butter squash','onion','carrot', 'garlic','butter','black pepper', 'cinnamon','coconut milk']\
+                ,'1. Grill the butter squash, onion, carrot and garlic in the oven until'
+                  'they get soft and golden on top 2. Put all in blender with'
+                  'butter and coconut milk. Blend them till they become puree. Then move the content into a pot'
+                      '. Add coconut milk. Simmer for 5 mintues.'],
+                'shirazi salad':[5, True, 'salad','Iranian', ['cucumber', 'tomato', 'onion', 'lemon juice'], \
+                    '1. dice cucumbers, tomatoes and onions 2. put all into a bowl 3. pour lemon juice 3. add salt'
+                        '4. Mixed them thoroughly'],
+                'Home-made Beef Sausage': [60, False, 'deli','All',['sausage casing', 'regular ground beef','garlic',\
+                    'corriander seeds','black pepper seeds','fennel seed','paprika'],'1. In a blender,'
+                        ' blend corriander seeds, black pepper seeds, fennel seeds and garlic to make'
+                        'the seasonings 2. In a bowl, mix ground beef with the'
+                        'seasoning 3. Add all the content to a sausage stuffer. Put the casing on'
+                        "the stuffer funnel. Rotate the stuffer's handle (or turn it on) to make your yummy sausages!"]}
+class DecodeRecipe(Food):
+    def __init__():
+      self.name = food.key
+      self.prep_time = food.value[0]
+      self.is_vegetarian = food.value[1]
+      self.food_type =  food.value[2]
+      self.cuisine = food.value[3]
+      self.ingredients = food.value[4]
+      self.recipe = food.value[5]
+class PrintRecipe(Food):
+    def __init__():
+      for key, value in foods.items():
+          print("Name:", self.name)
+          print("Prep time:",self.prep_time, "mins")
+          print("Is Veggie?", 'Yes' if self.is_vegetarian  else "No")
+          print("Food Type:", self.food_type)
+          print("Cuisine:", self.cuisine)
+          for item in self.ingredients:
+              print(item, end=', ')
+          print()
+          print("recipe", self.recipe)
+          print("***")
+      return

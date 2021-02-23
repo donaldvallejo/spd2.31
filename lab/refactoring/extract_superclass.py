@@ -1,49 +1,54 @@
-# By Kamran Bigdely
-# Extract superclass
-class AngryMushroom:
-    
-    def __init__(self):
-        self.health = 100
-        
-    def take_damage(self, damage):
-        self.health -= damage
-        
-    def spread_poison(self):
-        print('spreading poison!')
+class Shape:
+
+    def __init__(self, x, y, visible = True):
+        self.x = x
+        self.y = y
+        self.visible = visible
+
+    def hide(self):
+        self.visible = False
+
+    def make_visible(self):
+        self.visible = True
 
 
-class AngryBot:
-    
-    def __init__(self):
-        self.health = 100
-        self.n_bullets = 40
-        
-    def take_damage(self, damage):
-        self.health -= damage
-        
-    def punch_iron_fist(self):
-        print("punching with iron fist!")
-        
-    def shoot(self):
-        print("shot a bullet!")
-        self.n_bullets -= 1
+class Circle(Shape):
+
+    def __init__(self, x, y, r, visible = True):
+        super().__init__(x, y, visible)
+        self.r = r
+
+    def display(self):
+        if self.visible:
+            print('drew the circle.')
+
+    def get_center(self):
+        return self.x, self.y
 
 
+class Rectangle(Shape):
 
-class AgressiveAlligator:
-    
-    def __init__(self):
-        self.health = 100
-        
-    def take_damage(self, damage):
-        self.health -= damage
-        
-    def bite(self):
-        print('bitting!')
+    def __init__(self, x, y, width, height, visible = True):
+        super().__init__(x, y, visible)
+        self.width = width
+        self.height = height
 
+    def display(self):
+        if self.visible:
+            print('drew the rectable.')
 
-angryMushroom = AngryMushroom()
-print("initial health level:", angryMushroom.health)
-angryMushroom.take_damage(25)
-print("took damage!")
-print("current health level:",angryMushroom.health)
+    def get_center(self):
+        return self.x + self.width/2, self.y + self.height/2
+
+if __name__ == "__main__":
+    circle = Circle(0, 0, 10, False)
+    circle.make_visible()
+    circle.display()
+    print('center point',circle.get_center())
+
+    rect = Rectangle(10, 10, 20, 5)
+    rect.hide()
+    rect.display() # does not display because it's hidden.
+    rect.make_visible()
+    rect.display()
+    print('center point',rect.get_center())

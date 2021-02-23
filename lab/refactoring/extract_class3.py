@@ -1,29 +1,35 @@
-ELL_DONE = 3000
-MEDIUM = 2500
-COOKED_CONSTANT = 0.05
+class Cooking:
+    def __init__(self, time, temp, pressure, desired):
+        self.well_done = 3000
+        self.medium = 2500
+        self.cooked_constant = 0.05
+        self.time = time
+        self.temp = temp
+        self.pressure = pressure
+        self.desired = desired
+
+    def is_cookeding_criteria_satisfied(self):
+        return is_well_done() or is_medium()
+
+    def is_well_done(self):
+        return self.desired == 'well-done' and  \
+            get_cooking_progress() >= self.well_done
+
+    def is_medium(self):
+        return self.desired == 'medium' and  \
+            get_cooking_progress() >= self.medium
+
+    def get_cooking_progress(self):
+        return self.time * self.temp * self.pressure * self.cooked_constant
+
+
 TIME = 30 # [min]
-TEMP = 103 # [celcius]
+TEMP = 103 # [celsius]
 PRESSURE = 20 # [psi]
 DESIRED_STATE = 'well-done'
-class CookType:
-    def __init__(self, is_cooking_criteria_satisfied, get_cooking_progress):
-        self.check_cooking = CheckCooking(is_cooking_criteria_satisfied, get_cooking_progress)
-    def is_well_done(time, temperature, pressure, desired_state):    
-        return desired_state == 'well-done' and  \
-            self.check_cooking.get_cooking_progress(time, temperature, pressure) >= WELL_DONE
-    def is_medium(time, temperature, pressure, desired_state):
-        return desired_state == 'medium' and  \
-            self.check_cooking.get_cooking_progress(time, temperature, pressure) >= MEDIUM
-class CheckCooking:
-    def __init__(self, is_well_done, is_medium):
-        self.cook_type = CookType(is_well_done, is_medium)
-    def is_cooking_criteria_satisfied(time, temperature, 
-                                        pressure, desired_state):
-        return is_well_done(time, temperature, pressure, desired_state) or \
-            is_medium(time, temperature, pressure, desired_state)
-    def get_cooking_progress(time, temperature, pressure):
-        return time * temperature * pressure * COOKED_CONSTANT
-    if is_cookeding_criteria_satisfied(time, temp, pressure, desired_state):
-        print('cooking is done.')
-    else:
-        print('ongoing cooking.')
+COOKING = Cooking(TIME, TEMP, PRESSURE, DESIRED_STATE)
+
+if COOKING.is_cookeding_criteria_satisfied():
+    print('cooking is done.')
+else:
+    print('ongoing cooking.')

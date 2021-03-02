@@ -38,4 +38,5 @@ def print_stat(mean, sd):
 display_grade_stat()
 
 def test_calculate_stat():
-    grade_list[6,6,8,9,10]
+    grade_list = [6,6,8,9,10]
+    assert mean, sd == mean, sd

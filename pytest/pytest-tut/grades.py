@@ -1,4 +1,5 @@
 import math 
+import pytest
 
 def display_grade_stat():
     """Gathers stats and print them out."""
@@ -37,6 +38,7 @@ def print_stat(mean, sd):
 
 display_grade_stat()
 
-def test_calculate_stat():
-    grade_list = [6,6,8,9,10]
-    assert mean, sd == mean, sd
+def test_calculate_stat(grade_list, expected_mean, expected_sd):
+    actual_mean, actual_sd = calculate_stat(grade_list)
+    assert actual_mean == expected_mean
+    assert actual_sd == expected_sd
